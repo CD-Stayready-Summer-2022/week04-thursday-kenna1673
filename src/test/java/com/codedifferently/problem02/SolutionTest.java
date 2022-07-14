@@ -17,7 +17,7 @@ public class SolutionTest {
     public void howManyLettersDoYouSeeTest02(){
         Solution solution = new Solution();
         String words = "abcdefaabbccdd";
-        String expected = "a:3 b:3 c:3 d:1 e:1 f:1";
+        String expected = "a:3 b:3 c:3 d:1 e:1 f:1"; // d appears 3 times
         String actual = solution.howManyLettersDoYouSee(words);
         Assertions.assertEquals(expected, actual);
     }
