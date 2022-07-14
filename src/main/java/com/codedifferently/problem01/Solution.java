@@ -1,5 +1,7 @@
 package com.codedifferently.problem01;
 
+import java.util.*;
+
 public class Solution {
     /**
      * You will be given an array of numbers, search the array and return the longest
@@ -11,6 +13,37 @@ public class Solution {
      * @return
      */
     public String findLongestConsecutiveSet(Integer[] allNumbers){
-        return null;
+        Arrays.sort(allNumbers);
+        int count = 0;
+        int largest = 0;
+        Set<Integer> consecutive = new TreeSet<>();
+        Set<Integer> longest;
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int i = 0; i < allNumbers.length; i++) {
+            if (i > 0 && allNumbers[i] == allNumbers[i - 1] + 1) {
+                count++;
+                consecutive.add(allNumbers[i - 1]);
+                consecutive.add(allNumbers[i]);
+            } else {
+                map.put(consecutive.size(), consecutive);
+                consecutive = new TreeSet<>();
+                count = 1;
+            }
+            if (i == allNumbers.length - 1) {
+                map.put(count, consecutive);
+            }
+            largest = Math.max(largest, count);
+
+        }
+        longest = map.get(largest);
+
+        StringBuilder builder = new StringBuilder("Longest Set: {");
+        for (Integer num : longest) {
+            builder.append(num).append(" ");
+        }
+        String finalSet = builder.toString();
+        finalSet = finalSet.trim();
+        finalSet = finalSet + "}";
+        return finalSet;
     }
 }
